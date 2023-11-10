@@ -3,11 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Conversor de Temperatura</title>
-
-<style>
-
-body {
+    <title>Conversor de Unidades</title>
+    <style>
+        body {
     font-family: Arial, sans-serif;
     background-color: #f4f4f4;
     margin: 0;
@@ -40,7 +38,7 @@ select {
 }
 
 input[type="submit"] {
-    background-color: #4caf50;
+    background-color: #3498db;
     color: white;
     padding: 10px 15px;
     border: none;
@@ -50,7 +48,7 @@ input[type="submit"] {
 }
 
 input[type="submit"]:hover {
-    background-color: #45a049;
+    background-color: #2980b9;
 }
 
 p {
@@ -59,20 +57,40 @@ p {
     font-weight: bold;
     color: #333;
 }
-sd
-</style>
+
+    </style>
 </head>
 <body>
 
 <?php
-// Função para converter Celsius para Fahrenheit
-function celsiusToFahrenheit($celsius) {
-    return ($celsius * 9/5) + 32;
+// Função para converter metros para quilômetros
+function metrosToQuilometros($metros) {
+    return $metros / 1000;
 }
 
-// Função para converter Fahrenheit para Celsius
-function fahrenheitToCelsius($fahrenheit) {
-    return ($fahrenheit - 32) * 5/9;
+// Função para converter quilômetros para metros
+function quilometrosToMetros($quilometros) {
+    return $quilometros * 1000;
+}
+
+// Função para converter metros para centímetros
+function metrosToCentimetros($metros) {
+    return $metros * 100;
+}
+
+// Função para converter centímetros para metros
+function centimetrosToMetros($centimetros) {
+    return $centimetros / 100;
+}
+
+// Função para converter milímetros para metros
+function milimetrosToMetros($milimetros) {
+    return $milimetros / 1000;
+}
+
+// Função para converter metros para milímetros
+function metrosToMilimetros($metros) {
+    return $metros * 1000;
 }
 
 // Verificar se o formulário foi enviado
@@ -83,11 +101,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     $resultado = 0;
 
-    // Converter a temperatura
-    if ($unidadeOrigem == "celsius" && $unidadeDestino == "fahrenheit") {
-        $resultado = celsiusToFahrenheit($valor);
-    } elseif ($unidadeOrigem == "fahrenheit" && $unidadeDestino == "celsius") {
-        $resultado = fahrenheitToCelsius($valor);
+    // Converter a unidade de comprimento
+    if ($unidadeOrigem == "metros" && $unidadeDestino == "quilometros") {
+        $resultado = metrosToQuilometros($valor);
+    } elseif ($unidadeOrigem == "quilometros" && $unidadeDestino == "metros") {
+        $resultado = quilometrosToMetros($valor);
+    } elseif ($unidadeOrigem == "metros" && $unidadeDestino == "centimetros") {
+        $resultado = metrosToCentimetros($valor);
+    } elseif ($unidadeOrigem == "centimetros" && $unidadeDestino == "metros") {
+        $resultado = centimetrosToMetros($valor);
+    } elseif ($unidadeOrigem == "milimetros" && $unidadeDestino == "metros") {
+        $resultado = milimetrosToMetros($valor);
+    } elseif ($unidadeOrigem == "metros" && $unidadeDestino == "milimetros") {
+        $resultado = metrosToMilimetros($valor);
     } else {
         // Lidar com outras conversões de unidades, se necessário
         echo "Conversão não suportada.";
@@ -105,15 +131,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     <label for="unidadeOrigem">De:</label>
     <select name="unidadeOrigem" required>
-        <option value="celsius">Celsius</option>
-        <option value="fahrenheit">Fahrenheit</option>
+        <option value="metros">Metros</option>
+        <option value="quilometros">Quilômetros</option>
+        <option value="centimetros">Centímetros</option>
+        <option value="milimetros">Milímetros</option>
         <!-- Adicione mais opções conforme necessário -->
     </select>
 
     <label for="unidadeDestino">Para:</label>
     <select name="unidadeDestino" required>
-        <option value="celsius">Celsius</option>
-        <option value="fahrenheit">Fahrenheit</option>
+        <option value="metros">Metros</option>
+        <option value="quilometros">Quilômetros</option>
+        <option value="centimetros">Centímetros</option>
+        <option value="milimetros">Milímetros</option>
         <!-- Adicione mais opções conforme necessário -->
     </select>
 
